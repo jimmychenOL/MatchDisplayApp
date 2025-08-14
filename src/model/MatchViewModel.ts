@@ -37,7 +37,6 @@ export default class MatchViewModel {
     cancelHomeGoal() {
         // 取得最後一個字元
         const lastChar = this.matchResult.slice(-1);
-        
         // 如果最後一個字元是 'H'，則移除它
         if (lastChar === 'H') {
             this.matchResult = this.matchResult.slice(0, -1);
