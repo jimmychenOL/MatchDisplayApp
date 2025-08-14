@@ -8,17 +8,19 @@ import {
   useColorScheme,
   Alert,
 } from 'react-native';
+import { useMatchDisplay } from './hook/useMatchDisplay';
 
 const MatchDisplayScreen = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const [inputText, setInputText] = useState('');
+  const { getMatchResult, homeScore, awayScore, period } = useMatchDisplay();
 
   const handleButtonPress = () => {
-    if (inputText.trim()) {
-      Alert.alert('輸入內容', `你輸入了: ${inputText}`);
-    } else {
-      Alert.alert('提示', '請輸入一些文字');
+    if (inputText.trim() === '') {
+      Alert.alert('錯誤', '請輸入有效的文字');
+      return;
     }
+    getMatchResult(parseInt(inputText));
   };
 
   return (
@@ -26,7 +28,7 @@ const MatchDisplayScreen = () => {
       <Text style={[styles.title, { color: isDarkMode ? '#FFFFFF' : '#000000' }]}>
         Match Display 畫面
       </Text>
-      
+
       <View style={styles.inputContainer}>
         <Text style={[styles.label, { color: isDarkMode ? '#FFFFFF' : '#000000' }]}>
           請輸入文字：
@@ -60,6 +62,10 @@ const MatchDisplayScreen = () => {
           </Text>
         </View>
       ) : null}
+
+      <Text>主隊得分：{homeScore}</Text>
+      <Text>客隊得分：{awayScore}</Text>
+      <Text>比賽階段：{period}</Text>
     </View>
   );
 };
