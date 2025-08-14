@@ -4,9 +4,11 @@ export enum MatchEvent {
     CancelHomeGoal = 'CancelHomeGoal',
     CancelAwayGoal = 'CancelAwayGoal',
 }
+
+// cancel 成功 cancel 失敗
 export default class MatchService {
     private static instance: MatchService;
-    getInstance(): MatchService {
+    static getInstance(): MatchService {
         if (!MatchService.instance) {
             MatchService.instance = new MatchService();
         }
